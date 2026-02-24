@@ -48,10 +48,9 @@ authRouter.post("/login", async (req, res) => {
     // const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "10s" });
     const token = await user.getJWT();
     res.cookie("token", token);
-    res.send("Login Successful");
-    // res.status(404).send("Invalid Credentials");
+    res.json({ message: "Login Successful", user });
   } catch (err) {
-    res.status(404).send("Error while login: " + err.message);
+    res.status(404).json({ message: "Error while login: " + err.message });
   }
 });
 
